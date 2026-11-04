@@ -94,3 +94,18 @@ Helper scripts in `~/alist/` on the host:
 - **Start services**: `~/alist/start.sh`
 - **Stop services**: `~/alist/stop.sh`
 - **View logs**: `tail -f ~/alist/alist.log ~/alist/rclone-webdav.log`
+
+---
+
+## 6. Video Streaming Optimization (`rclone serve webdav`)
+
+To ensure fast video playback startup and responsive seeking (especially for phone-recorded `.mp4` files where the `moov` index atom is at the end of the file), `rclone serve webdav` in `~/alist/start.sh` is configured with smaller initial chunk and buffer sizes instead of rclone's 128 MB default:
+
+```bash
+rclone serve webdav gdrive-crypt: \
+  --addr 127.0.0.1:8081 \
+  --vfs-cache-mode writes \
+  --vfs-read-chunk-size 8M \
+  --vfs-read-chunk-size-limit 64M \
+  --buffer-size 4M
+```

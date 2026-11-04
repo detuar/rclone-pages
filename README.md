@@ -21,7 +21,7 @@ Browser (:5244) ──► AList (/) ──► rclone serve webdav (127.0.0.1:808
 ```
 
 - **Frontend**: [AList](https://github.com/AlistGo/alist) (`v3.66.0` `android/arm64`) listening on port `5244` with the encrypted Drive mounted directly at **`/`**.
-- **Encryption & Cloud Bridge**: `rclone serve webdav gdrive-crypt: --addr 127.0.0.1:8081 --vfs-cache-mode writes` (100% userspace, no root or FUSE required).
+- **Encryption & Cloud Bridge**: `rclone serve webdav gdrive-crypt: --addr 127.0.0.1:8081 --vfs-cache-mode writes --vfs-read-chunk-size 8M --vfs-read-chunk-size-limit 64M --buffer-size 4M` (100% userspace, no root or FUSE required).
 - **Storage**: Google Drive (`gdrive:crypt` inside `appDataFolder`) with `standard` filename encryption and directory name encryption enabled.
 - **Direct CLI Access (`gdcp` / `gdls`)**: Any device with the same `rclone.conf` can upload and list encrypted files directly against Google Drive even when the WebUI host is offline.
 
